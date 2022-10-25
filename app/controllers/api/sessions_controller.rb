@@ -3,7 +3,6 @@ class Api::SessionsController < ApplicationController
   before_action :require_logged_in, only: [:destroy]
 
   def show
-    banana
     @user = current_user
     if @user
       # render json: { user: @user }

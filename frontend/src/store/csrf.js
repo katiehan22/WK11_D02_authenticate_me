@@ -1,12 +1,12 @@
 export const restoreCSRF = async () => {
-  let res = await csrfFetch('/api/session');
+  const res = await csrfFetch('/api/session');
   storeCSRFToken(res);
   return res;
 };
 
 export const storeCSRFToken = (res) => {
-  let token = res.headers.get('X-CSRF-Token');
-  sessionStorage.setItem('X-CSRF-Token', token);
+  const token = res.headers.get('X-CSRF-Token');
+  if(token) sessionStorage.setItem('X-CSRF-Token', token);
 };
 
 const csrfFetch = async (url, options = {}) => {
@@ -14,7 +14,7 @@ const csrfFetch = async (url, options = {}) => {
   options.headers ||= {};
 
   if (options.method.toUpperCase() !== 'GET') {
-    options.headers['Content-Type'] = 'application/json';
+    options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json';
     options.headers['X-CSRF-Token'] = sessionStorage.getItem("X-CSRF-Token");
   };
 
