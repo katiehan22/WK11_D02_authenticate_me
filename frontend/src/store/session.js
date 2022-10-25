@@ -1,4 +1,4 @@
-import {csrfFetch} from './csrf.js'
+import csrfFetch from './csrf.js'
 
 const ADD_USER = 'ADD_USER';
 const REMOVE_USER = 'REMOVE_USER';
@@ -30,8 +30,8 @@ export const login = (user) => async dispatch => {
   dispatch(addCurrentUser(data));
 }
 
-const sessionReducer = () => {
-
+const sessionReducer = (state = {}, action) => {
+  return state;
 }
 
 export default sessionReducer;
