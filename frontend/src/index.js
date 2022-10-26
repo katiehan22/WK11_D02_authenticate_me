@@ -7,12 +7,15 @@ import App from './App';
 import configureStore from './store';
 import csrfFetch, { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session'
+// import { login } from './store/session';
 
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.csrfFetch = csrfFetch;
+  window.sessionActions = sessionActions;
+  // window.login = login;
 }
 
 function Root() {
@@ -26,7 +29,7 @@ function Root() {
 }
 
 const renderApplicaton = () => {
-  ReactDOM.render(
+  return ReactDOM.render(
     <React.StrictMode>
       <Root />
     </React.StrictMode>,
