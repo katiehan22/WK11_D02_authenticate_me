@@ -37,7 +37,7 @@ const LoginFormPage = () => {
 
   return (
     <>
-    <h1>Login</h1>
+    <h1>Log In</h1>
     <form onSubmit={handleLogin} className="login-form">
       <ul>
         {errors.map(error => <li key={error}>{error}</li>)}
