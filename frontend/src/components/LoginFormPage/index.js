@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+import './LoginForm.css';
 
 const LoginFormPage = () => {
 
@@ -38,7 +38,7 @@ const LoginFormPage = () => {
   return (
     <>
     <h1>Login</h1>
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="login-form">
       <ul>
         {errors.map(error => <li key={error}>{error}</li>)}
       </ul>

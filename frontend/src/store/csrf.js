@@ -1,6 +1,10 @@
 export const restoreCSRF = async () => {
+  // debugger
   const res = await csrfFetch('/api/session');
   storeCSRFToken(res);
+  // debugger
+  let data = await res.json();
+  sessionStorage.setItem('currentUser', JSON.stringify(data.user));
   return res;
 };
 
@@ -10,6 +14,7 @@ export const storeCSRFToken = (res) => {
 };
 
 const csrfFetch = async (url, options = {}) => {
+  // debugger
   options.method ||= 'GET';
   options.headers ||= {};
 
