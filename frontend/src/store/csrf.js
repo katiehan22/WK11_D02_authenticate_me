@@ -1,17 +1,16 @@
-export const restoreCSRF = async () => {
-  // debugger
-  const res = await csrfFetch('/api/session');
-  storeCSRFToken(res);
-  // debugger
-  let data = await res.json();
-  sessionStorage.setItem('currentUser', JSON.stringify(data.user));
-  return res;
-};
+// export const restoreCSRF = async () => {
+//   const res = await csrfFetch('/api/session');
+//   storeCSRFToken(res);
+//   // let data = await res.json();
+//   // sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+//   return res;
+// };
 
-export const storeCSRFToken = (res) => {
-  const token = res.headers.get('X-CSRF-Token');
-  if(token) sessionStorage.setItem('X-CSRF-Token', token);
-};
+// Moved to src > store > session.js
+// export const storeCSRFToken = (res) => {
+//   const token = res.headers.get('X-CSRF-Token');
+//   if(token) sessionStorage.setItem('X-CSRF-Token', token);
+// };
 
 const csrfFetch = async (url, options = {}) => {
   // debugger

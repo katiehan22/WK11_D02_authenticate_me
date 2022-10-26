@@ -16,6 +16,19 @@ export const removeCurrentUser = () => {
   });
 };
 
+export const storeCurrentUser = (user) => {
+  if (user){
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+  } else {
+    sessionStorage.removeItem("currentUser");
+  }
+}
+
+export const storeCSRFToken = (res) => {
+  const token = res.headers.get('X-CSRF-Token');
+  if (token) sessionStorage.setItem('X-CSRF-Token', token);
+};
+
 export const login = (user) => async (dispatch) => {
   // debugger
   const { credential, password } = user;
@@ -27,12 +40,21 @@ export const login = (user) => async (dispatch) => {
     })
   });
   let data = await res.json();
-  dispatch(addCurrentUser(data));
+  storeCurrentUser(data.user);
+  dispatch(addCurrentUser(data.user));
   return res;
 }
 
-const initialState = { user: null}
+export const restoreSession = () => async (dispatch) => {
+  const res = await csrfFetch('/api/session');
+  storeCSRFToken(res);
+  const data = await res.json();
+  storeCurrentUser(data.user);
+  dispatch(addCurrentUser(data.user));
+  return res;
+}
 
+const initialState = { user: JSON.parse(sessionStorage.getItem("currentUser")) };
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER:
