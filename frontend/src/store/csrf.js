@@ -13,7 +13,6 @@
 // };
 
 const csrfFetch = async (url, options = {}) => {
-  // debugger
   options.method ||= 'GET';
   options.headers ||= {};
 
@@ -23,7 +22,6 @@ const csrfFetch = async (url, options = {}) => {
   };
 
   const res = await fetch(url, options);
-  // debugger
   if (res.ok) {
     return res;
   } else {
