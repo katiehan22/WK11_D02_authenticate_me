@@ -10,10 +10,9 @@ export const addCurrentUser = (user) => {
   });
 };
 
-export const removeCurrentUser = (userId) => {
+export const removeCurrentUser = () => {
   return ({
     type: REMOVE_USER,
-    userId
   });
 };
 
@@ -39,9 +38,7 @@ const sessionReducer = (state = initialState, action) => {
     case ADD_USER:
       return { ...state, user: action.payload }
     case REMOVE_USER:
-      let newState = { ...state };
-      delete newState[action.userId];
-      return newState;
+      return { ...state, user: null}
     default:
       return state;
   }
